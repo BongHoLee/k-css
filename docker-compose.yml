@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  css_db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: css_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "33060:3306"
+    restart: on-failure
