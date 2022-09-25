@@ -32,7 +32,7 @@ public class ItemCategory {
 
         if (!ITEM_CATEGORIES.contains(itemCategory)) {
             log.error("not support item category : {}", itemCategory);
-            throw new IllegalArgumentException("not supprot item category " + itemCategory);
+            throw new IllegalArgumentException("not support item category " + itemCategory);
         }
     }
 }
