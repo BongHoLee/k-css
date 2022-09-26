@@ -43,7 +43,7 @@ public enum Operator {
         this.expressionFunction = expressionFunction;
     }
 
-    public BooleanExpression expression(Key key, Value value) {
+    public BooleanExpression createExpressionWith(Key key, Value value) {
         return this.expressionFunction.apply(key, value);
     }
 

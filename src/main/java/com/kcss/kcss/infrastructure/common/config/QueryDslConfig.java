@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.config;
+package com.kcss.kcss.infrastructure.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;

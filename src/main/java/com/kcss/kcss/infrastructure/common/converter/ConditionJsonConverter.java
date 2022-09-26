@@ -1,10 +1,9 @@
-package com.kcss.kcss.infrastructure.converter;
+package com.kcss.kcss.infrastructure.common.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
-import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.AttributeConverter;

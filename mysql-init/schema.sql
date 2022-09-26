@@ -1,11 +1,11 @@
-create table if not exists account
+create table if not exists css_db.account
 (
     account_id bigint auto_increment primary key,
     age        int          not null,
     residence  varchar(255) null
-    );
+);
 
-create table if not exists payment
+create table if not exists css_db.payment
 (
     payment_id    bigint auto_increment primary key,
     amount        double       not null,
@@ -14,7 +14,7 @@ create table if not exists payment
     region        varchar(255) not null,
     account_id    bigint       not null
     );
-create table if not exists pgroup
+create table if not exists css_db.pgroup
 (
     group_id    bigint auto_increment primary key,
     conditions  json         not null,

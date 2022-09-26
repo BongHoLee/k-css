@@ -1,15 +1,12 @@
 package com.kcss.kcss.infrastructure.entity.group.condition;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import javax.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public class Condition {
@@ -24,6 +21,6 @@ public class Condition {
     }
 
     public BooleanExpression operate() {
-        return operator.expression(key, value);
+        return operator.createExpressionWith(key, value);
     }
 }

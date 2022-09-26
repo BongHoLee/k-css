@@ -1,13 +1,9 @@
-package com.kcss.kcss.infrastructure.repository;
+package com.kcss.kcss.infrastructure.entity.group.condition;
 
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
-import com.kcss.kcss.infrastructure.entity.group.condition.Key;
-import com.kcss.kcss.infrastructure.entity.group.condition.Operator;
-import com.kcss.kcss.infrastructure.entity.group.condition.Value;
 import com.kcss.kcss.infrastructure.entity.payment.ItemCategory;
 import com.kcss.kcss.infrastructure.entity.payment.MethodType;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
