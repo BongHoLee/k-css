@@ -1,8 +1,9 @@
-package com.kcss.kcss.infrastructure.entity.condition;
+package com.kcss.kcss.infrastructure.entity.group.condition;
 
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.querydsl.core.types.Expression;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -37,6 +38,7 @@ public enum Key {
         return this.converter.apply(value);
     }
 
+    @JsonValue
     public String getKeyName() {
         return this.keyName;
     }

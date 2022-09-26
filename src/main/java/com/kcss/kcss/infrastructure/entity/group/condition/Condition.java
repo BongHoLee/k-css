@@ -1,12 +1,17 @@
-package com.kcss.kcss.infrastructure.entity.condition;
+package com.kcss.kcss.infrastructure.entity.group.condition;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Embeddable
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode
 public class Condition {
     private Key key;
     private Operator operator;

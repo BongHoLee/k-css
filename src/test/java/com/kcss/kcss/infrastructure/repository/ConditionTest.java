@@ -4,10 +4,10 @@ import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.account
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.kcss.kcss.infrastructure.entity.condition.Condition;
-import com.kcss.kcss.infrastructure.entity.condition.Key;
-import com.kcss.kcss.infrastructure.entity.condition.Operator;
-import com.kcss.kcss.infrastructure.entity.condition.Value;
+import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
+import com.kcss.kcss.infrastructure.entity.group.condition.Key;
+import com.kcss.kcss.infrastructure.entity.group.condition.Operator;
+import com.kcss.kcss.infrastructure.entity.group.condition.Value;
 import com.kcss.kcss.infrastructure.entity.payment.ItemCategory;
 import com.kcss.kcss.infrastructure.entity.payment.MethodType;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;

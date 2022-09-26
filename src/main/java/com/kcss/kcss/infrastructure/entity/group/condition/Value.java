@@ -1,14 +1,22 @@
-package com.kcss.kcss.infrastructure.entity.condition;
+package com.kcss.kcss.infrastructure.entity.group.condition;
 
+import static com.querydsl.core.types.dsl.Expressions.constant;
 import static java.util.stream.Collectors.toList;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.dsl.Expressions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Value {
+    @JsonValue
     private String value;
 
     public Value(String value) {
@@ -39,7 +47,7 @@ public class Value {
         if (value.contains("$")) {
             return Key.of(value.replace("$", "")).expression();
         } else {
-            return Expressions.constant(key.convertByType(value));
+            return constant(key.convertByType(value));
         }
     }
 

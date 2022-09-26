@@ -3,7 +3,7 @@ package com.kcss.kcss.infrastructure.repository;
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 
-import com.kcss.kcss.infrastructure.entity.condition.Condition;
+import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
