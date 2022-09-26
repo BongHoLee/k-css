@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @SpringBootTest
 @Transactional
 class QueryDSLTest {
@@ -56,7 +57,6 @@ class QueryDSLTest {
         Condition c1 = new Condition(Key.AMOUNT, Operator.BETWEEN, new Value("[100000, 999999]"));
         Condition c2 = new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("카드"));
 
-
         List<PaymentEntity> fetch = queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
                 .where(c1.operate(), c2.operate())
@@ -64,6 +64,4 @@ class QueryDSLTest {
 
         System.out.println(fetch);
     }
-
-
 }

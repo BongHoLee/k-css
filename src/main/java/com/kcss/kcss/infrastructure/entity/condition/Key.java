@@ -3,8 +3,6 @@ package com.kcss.kcss.infrastructure.entity.condition;
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 
-import com.kcss.kcss.infrastructure.entity.account.QAccountEntity;
-import com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity;
 import com.querydsl.core.types.Expression;
 import java.util.Arrays;
 import java.util.function.Function;

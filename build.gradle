@@ -36,6 +36,10 @@ dependencies {
     implementation "com.querydsl:querydsl-core:${queryDslVersion}"
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 
+    testImplementation "org.testcontainers:testcontainers:1.17.3"
+    implementation platform('org.testcontainers:testcontainers-bom:1.17.3') //import bom
+    testImplementation('org.testcontainers:mysql') //no version specified
+
     /*
      * `NoClassDefFoundError` 관련 대응으로 필요하다.
      * 참고로 javax -> jakarta 로 이름이 변경되었다.
