@@ -1,29 +1,46 @@
 package com.kcss.kcss.infrastructure.entity.condition;
 
+import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
+import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
+
+import com.kcss.kcss.infrastructure.entity.account.QAccountEntity;
 import com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity;
 import com.querydsl.core.types.Expression;
 import java.util.Arrays;
+import java.util.function.Function;
 
+// Key에 대한 Expression과 Type으로 변환해주는 책임
 public enum Key {
-    REGION("region", QPaymentEntity.paymentEntity.region.region),
-    RESIDENCE("residence", QPaymentEntity.paymentEntity.account.residence.residence),
-    AMOUNT("amount", QPaymentEntity.paymentEntity.amount.amount),
-    METHOD_TYPE("methodType", QPaymentEntity.paymentEntity.methodType.methodType),
-    ITEM_CATEGORY("itemCategory", QPaymentEntity.paymentEntity.itemCategory.itemCategory),
-    ACCOUNT_ID("accountId", QPaymentEntity.paymentEntity.account.id),
-    AGE("age", QPaymentEntity.paymentEntity.account.id)
+    REGION("region", paymentEntity.region.region, value -> value),
+    RESIDENCE("residence", paymentEntity.account.residence.residence, value -> value),
+    METHOD_TYPE("methodType", paymentEntity.methodType.methodType, value -> value),
+    ITEM_CATEGORY("itemCategory", paymentEntity.itemCategory.itemCategory, value -> value),
+    ACCOUNT_ID("accountId", accountEntity.id, Long::parseLong),
+    AMOUNT("amount", paymentEntity.amount.amount, Double::parseDouble),
+    AGE("age", accountEntity.age.age, Long::parseLong)
     ;
 
     private final String keyName;
     private final Expression<?> expression;
 
-    Key(String keyName, Expression<?> expression) {
+    private final Function<String, Object> converter;
+
+    Key(String keyName, Expression<?> expression, Function<String, Object> converter) {
         this.keyName = keyName;
         this.expression = expression;
+        this.converter = converter;
     }
 
     public Expression<?> expression() {
         return this.expression;
+    }
+
+    public Object convertByType(String value) {
+        return this.converter.apply(value);
+    }
+
+    public String getKeyName() {
+        return this.keyName;
     }
 
     public static Key of(String keyName) {
@@ -31,9 +48,5 @@ public enum Key {
                 .filter(key -> key.getKeyName().equals(keyName))
                 .findFirst()
                 .orElseThrow();
-    }
-
-    public String getKeyName() {
-        return this.keyName;
     }
 }

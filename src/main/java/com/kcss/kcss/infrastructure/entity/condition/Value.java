@@ -1,8 +1,11 @@
 package com.kcss.kcss.infrastructure.entity.condition;
 
+import static java.util.stream.Collectors.toList;
+
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Value {
@@ -12,45 +15,45 @@ public class Value {
         this.value = value;
     }
 
-    public List<Expression<?>> expressionsWith() {
-        return expressionsWith(this.value);
+    public List<Object> plainsOf(Key key) {
+        return values().stream()
+                .map(eachValue -> plainType(eachValue, key))
+                .collect(toList());
     }
 
-
-    private List<Expression<?>> expressionsWith(String value) {
-        List<Expression<?>> expressions = new ArrayList<>();
-        if (value.startsWith("[") && value.endsWith("]")) {
-            expressions.addAll(multipleValues(value));
-        } else if (value.contains("$")) {
-            expressions.add(keyParameter(value));
+    private Object plainType(String value, Key key) {
+        if (value.contains("$")) {
+            return Key.of(value.replace("$", ""));
         } else {
-            expressions.add(plainValue(value));
+            return key.convertByType(value);
+        }
+    }
+
+    public List<Expression<?>> expressionsOf(Key key) {
+        return values().stream()
+                .map(eachValue -> expressionType(eachValue, key))
+                .collect(toList());
+    }
+
+    private Expression<?> expressionType(String value, Key key) {
+        if (value.contains("$")) {
+            return Key.of(value.replace("$", "")).expression();
+        } else {
+            return Expressions.constant(key.convertByType(value));
+        }
+    }
+
+    private List<String> values() {
+        List<String> valueList = new ArrayList<>();
+        if (value.startsWith("[") && value.endsWith("]")) {
+            valueList.addAll(Arrays.asList(value.replace("[", "")
+                    .replace("]", "")
+                    .replace(" ", "")
+                    .split(",")));
+        } else {
+            valueList.add(value);
         }
 
-        return expressions;
+        return valueList;
     }
-
-    private Expression<?> plainValue(String value) {
-        return Expressions.constant(value);
-    }
-
-    private Expression<?> keyParameter(String value) {
-        return Key.of(value.replace("$", "")).expression();
-    }
-
-    private List<Expression<?>> multipleValues(String value) {
-        List<Expression<?>> expressions = new ArrayList<>();
-
-        String[] values = value.replace("[", "")
-                .replace("]", "")
-                .replace(" ", "")
-                .split(",");
-
-        for (String each : values) {
-            expressions.addAll(expressionsWith(each));
-        }
-
-        return expressions;
-    }
-
 }
