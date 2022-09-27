@@ -24,9 +24,7 @@ public class Residence {
                     "경남", "제주"
             ));
 
-
     private String residence;
-
     public Residence(String residence) {
         validation(residence);
         this.residence = residence;

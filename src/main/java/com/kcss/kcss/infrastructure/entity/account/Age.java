@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Age {
     private int age;
-
     public Age (int age) {
         if (age < 1) {
             throw new IllegalArgumentException("AGE MUST LARGER THAN 0");
