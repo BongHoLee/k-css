@@ -3,7 +3,8 @@ create table if not exists css_db.account
     account_id bigint auto_increment primary key,
     age        int          not null,
     residence  varchar(255) null
-);
+    ) default charset=utf8 collate utf8_general_ci;
+
 
 create table if not exists css_db.payment
 (
@@ -13,10 +14,12 @@ create table if not exists css_db.payment
     method_type   varchar(255) not null,
     region        varchar(255) not null,
     account_id    bigint       not null
-    );
+    ) default charset=utf8 collate utf8_general_ci;
+
 create table if not exists css_db.pgroup
 (
     group_id    bigint auto_increment primary key,
     conditions  json         not null,
     information varchar(255) null
-    );
+    )default charset=utf8 collate utf8_general_ci;
+
