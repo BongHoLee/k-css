@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.entity.group.condition;
+package com.kcss.kcss.infrastructure.entity.group.vo;
 
 import static com.querydsl.core.types.dsl.Expressions.booleanOperation;
 import static com.querydsl.core.types.dsl.Expressions.constant;
@@ -10,7 +10,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public enum Operator {
+public enum QslOperator {
     // collection operating type : Expressions.constant(Arrays.asList(PLAINT_TYPE, PLAIN_TYPE))
     IN("in",
             (key, value) -> booleanOperation(Ops.IN, key.expression(), constant(value.plainsOf(key)))),
@@ -36,15 +36,15 @@ public enum Operator {
     ;
     private String operatorName;
 
-    private BiFunction<Key, Value, BooleanExpression> expressionFunction;
+    private BiFunction<QslKey, QslValue, BooleanExpression> expressionFunction;
 
-    Operator(String operatorName, BiFunction<Key, Value, BooleanExpression> expressionFunction) {
+    QslOperator(String operatorName, BiFunction<QslKey, QslValue, BooleanExpression> expressionFunction) {
         this.operatorName = operatorName;
         this.expressionFunction = expressionFunction;
     }
 
-    public BooleanExpression createExpressionWith(Key key, Value value) {
-        return this.expressionFunction.apply(key, value);
+    public BooleanExpression createExpressionWith(QslKey qslKey, QslValue value) {
+        return this.expressionFunction.apply(qslKey, value);
     }
 
     @JsonValue
@@ -52,9 +52,9 @@ public enum Operator {
         return operatorName;
     }
 
-    private static Expression<?>[] generalOperatingExpressionsOf(Key key, Value value) {
-        List<Expression<?>> expressions = value.expressionsOf(key);
-        expressions.add(0, key.expression());
+    private static Expression<?>[] generalOperatingExpressionsOf(QslKey qslKey, QslValue value) {
+        List<Expression<?>> expressions = value.expressionsOf(qslKey);
+        expressions.add(0, qslKey.expression());
         return expressions.toArray(new Expression[0]);
     }
 }

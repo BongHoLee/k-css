@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.entity.group.condition;
+package com.kcss.kcss.infrastructure.entity.group.vo;
 
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 // Key에 대한 Expression과 Type으로 변환해주는 책임
-public enum Key {
+public enum QslKey {
     REGION("region", paymentEntity.region, value -> value),
     RESIDENCE("residence", paymentEntity.account.residence, value -> value),
     METHOD_TYPE("methodType", paymentEntity.methodType, value -> value),
@@ -24,7 +24,7 @@ public enum Key {
 
     private final Function<String, Object> converter;
 
-    Key(String keyName, Expression<?> expression, Function<String, Object> converter) {
+    QslKey(String keyName, Expression<?> expression, Function<String, Object> converter) {
         this.keyName = keyName;
         this.expression = expression;
         this.converter = converter;
@@ -43,8 +43,8 @@ public enum Key {
         return this.keyName;
     }
 
-    public static Key of(String keyName) {
-        return Arrays.stream(Key.values())
+    public static QslKey of(String keyName) {
+        return Arrays.stream(QslKey.values())
                 .filter(key -> key.getKeyName().equals(keyName))
                 .findFirst()
                 .orElseThrow();

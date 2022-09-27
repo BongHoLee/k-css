@@ -1,7 +1,7 @@
 package com.kcss.kcss.infrastructure.entity.group;
 
 import com.kcss.kcss.infrastructure.common.converter.ConditionJsonConverter;
-import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
+import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import java.util.List;
 import javax.persistence.Column;
@@ -32,18 +32,18 @@ public class GroupEntity {
 
     @Convert(converter = ConditionJsonConverter.class)
     @Column(name = "conditions", columnDefinition = "json")
-    private List<Condition> conditions;
+    private List<QslCondition> qslConditions;
 
     @Builder
-    public GroupEntity(Long id, String description, List<Condition> conditions) {
+    public GroupEntity(Long id, String description, List<QslCondition> qslConditions) {
         this.id = id;
         this.description = description;
-        this.conditions = conditions;
+        this.qslConditions = qslConditions;
     }
 
     public BooleanExpression[] expressionForCondition() {
-        return conditions.stream()
-                .map(Condition::operate)
+        return qslConditions.stream()
+                .map(QslCondition::operate)
                 .toArray(BooleanExpression[]::new);
     }
 }

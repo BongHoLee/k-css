@@ -8,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Amount {
     private Double amount;
-
     private Amount() {}
-
     private Amount(Double amount) {
         validation(amount);
         this.amount = amount;

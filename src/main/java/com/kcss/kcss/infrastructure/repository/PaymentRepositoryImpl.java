@@ -3,7 +3,7 @@ package com.kcss.kcss.infrastructure.repository;
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 
-import com.kcss.kcss.infrastructure.entity.group.condition.Condition;
+import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
@@ -18,7 +18,7 @@ public class PaymentRepositoryImpl {
     }
 
 
-    public List<PaymentEntity> findAll(Condition condition) {
+    public List<PaymentEntity> findAll(QslCondition qslCondition) {
         return queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
                 .where(paymentEntity.region.ne(accountEntity.residence))

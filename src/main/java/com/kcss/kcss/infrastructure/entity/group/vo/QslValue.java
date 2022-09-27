@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.entity.group.condition;
+package com.kcss.kcss.infrastructure.entity.group.vo;
 
 import static com.querydsl.core.types.dsl.Expressions.constant;
 import static java.util.stream.Collectors.toList;
@@ -15,37 +15,37 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Value {
+public class QslValue {
     @JsonValue
     private String value;
 
-    public Value(String value) {
+    public QslValue(String value) {
         this.value = value;
     }
 
-    public List<Object> plainsOf(Key key) {
+    public List<Object> plainsOf(QslKey key) {
         return values().stream()
                 .map(eachValue -> plainType(eachValue, key))
                 .collect(toList());
     }
 
-    private Object plainType(String value, Key key) {
+    private Object plainType(String value, QslKey key) {
         if (value.contains("$")) {
-            return Key.of(value.replace("$", ""));
+            return QslKey.of(value.replace("$", ""));
         } else {
             return key.convertByType(value);
         }
     }
 
-    public List<Expression<?>> expressionsOf(Key key) {
+    public List<Expression<?>> expressionsOf(QslKey key) {
         return values().stream()
                 .map(eachValue -> expressionType(eachValue, key))
                 .collect(toList());
     }
 
-    private Expression<?> expressionType(String value, Key key) {
+    private Expression<?> expressionType(String value, QslKey key) {
         if (value.contains("$")) {
-            return Key.of(value.replace("$", "")).expression();
+            return QslKey.of(value.replace("$", "")).expression();
         } else {
             return constant(key.convertByType(value));
         }

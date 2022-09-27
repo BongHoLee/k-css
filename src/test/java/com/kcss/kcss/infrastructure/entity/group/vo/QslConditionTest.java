@@ -1,11 +1,9 @@
-package com.kcss.kcss.infrastructure.entity.group.condition;
+package com.kcss.kcss.infrastructure.entity.group.vo;
 
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.kcss.kcss.infrastructure.entity.payment.ItemCategory;
-import com.kcss.kcss.infrastructure.entity.payment.MethodType;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -24,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("test")
 @Transactional
 @SpringBootTest
-class ConditionTest {
+class QslConditionTest {
 
     @Autowired
     JPAQueryFactory queryFactory;
@@ -32,12 +30,12 @@ class ConditionTest {
     @Test
     @DisplayName("EQUALS and NOT_EQUALS 조건 적용")
     void 결제자의_거주지역외_송금() {
-        Condition condition1 = new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금"));
-        Condition condition2 = new Condition(Key.RESIDENCE, Operator.NOT_EQUALS, new Value("$region"));
+        QslCondition qslCondition1 = new QslCondition(QslKey.METHOD_TYPE, QslOperator.EQUALS, new QslValue("송금"));
+        QslCondition qslCondition2 = new QslCondition(QslKey.RESIDENCE, QslOperator.NOT_EQUALS, new QslValue("$region"));
 
         List<PaymentEntity> fetch = queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
-                .where(condition1.operate(), condition2.operate())
+                .where(qslCondition1.operate(), qslCondition2.operate())
                 .fetch();
 
         assertThat(fetch).hasSize(37);
@@ -50,9 +48,9 @@ class ConditionTest {
     @Test
     @DisplayName("IN and EQUALS and BETWEEN 조건 적용")
     void 서울_경기_제주_경남_30대에서_60대_패션() {
-        Condition c1 = new Condition(Key.REGION, Operator.IN, new Value("[서울, 경기, 제주, 경남]"));
-        Condition c2 = new Condition(Key.ITEM_CATEGORY, Operator.EQUALS, new Value("패션"));
-        Condition c3 = new Condition(Key.AGE, Operator.BETWEEN, new Value("[30, 60]"));
+        QslCondition c1 = new QslCondition(QslKey.REGION, QslOperator.IN, new QslValue("[서울, 경기, 제주, 경남]"));
+        QslCondition c2 = new QslCondition(QslKey.ITEM_CATEGORY, QslOperator.EQUALS, new QslValue("패션"));
+        QslCondition c3 = new QslCondition(QslKey.AGE, QslOperator.BETWEEN, new QslValue("[30, 60]"));
 
         List<PaymentEntity> fetch = queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
@@ -69,8 +67,8 @@ class ConditionTest {
     @Test
     @DisplayName("BETWEEN and EQUALS 조건 적용")
     void 카드구매_100000이상_999999이하_테스트() {
-        Condition c1 = new Condition(Key.AMOUNT, Operator.BETWEEN, new Value("[100000, 999999]"));
-        Condition c2 = new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("카드"));
+        QslCondition c1 = new QslCondition(QslKey.AMOUNT, QslOperator.BETWEEN, new QslValue("[100000, 999999]"));
+        QslCondition c2 = new QslCondition(QslKey.METHOD_TYPE, QslOperator.EQUALS, new QslValue("카드"));
 
         List<PaymentEntity> fetch = queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
@@ -84,8 +82,8 @@ class ConditionTest {
 
     @Test
     void test() {
-        Condition c1 = new Condition(Key.AMOUNT, Operator.BETWEEN, new Value("[100000, 999999]"));
-        Condition c2 = new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("카드"));
+        QslCondition c1 = new QslCondition(QslKey.AMOUNT, QslOperator.BETWEEN, new QslValue("[100000, 999999]"));
+        QslCondition c2 = new QslCondition(QslKey.METHOD_TYPE, QslOperator.EQUALS, new QslValue("카드"));
 
         List<Tuple> fetch = queryFactory.select(
                         paymentEntity.count(),

@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.entity.group.condition;
+package com.kcss.kcss.infrastructure.entity.group.vo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
-public class Condition {
-    private Key key;
-    private Operator operator;
-    private Value value;
+public class QslCondition {
+    private QslKey key;
+    private QslOperator operator;
+    private QslValue value;
 
-    public Condition(Key key, Operator operator, Value value) {
+    public QslCondition(QslKey key, QslOperator operator, QslValue value) {
         this.key = key;
         this.operator = operator;
         this.value = value;
