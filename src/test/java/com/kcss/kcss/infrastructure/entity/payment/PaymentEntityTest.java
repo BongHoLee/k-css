@@ -1,20 +1,20 @@
-package com.kcss.kcss.domain.model.payment;
+package com.kcss.kcss.infrastructure.entity.payment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.kcss.kcss.domain.model.account.Account;
 import com.kcss.kcss.domain.model.account.vo.Age;
 import com.kcss.kcss.domain.model.account.vo.Residence;
+import com.kcss.kcss.domain.model.payment.Payment;
 import com.kcss.kcss.domain.model.payment.vo.Amount;
 import com.kcss.kcss.domain.model.payment.vo.ItemCategory;
 import com.kcss.kcss.domain.model.payment.vo.MethodType;
 import com.kcss.kcss.domain.model.payment.vo.Region;
 import com.kcss.kcss.infrastructure.entity.account.AccountEntity;
-import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PaymentTest {
+class PaymentEntityTest {
 
     @Test
     @DisplayName("AccountEntity에서 Account 변환 테스트")
