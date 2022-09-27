@@ -2,7 +2,6 @@ package com.kcss.kcss.infrastructure.entity.payment;
 
 import com.kcss.kcss.infrastructure.entity.account.AccountEntity;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,15 +28,15 @@ public class PaymentEntity {
     @JoinColumn(name = "accountId")
     private AccountEntity account;
 
-    @Embedded
-    private Amount amount;
+    @Column
+    private Double amount;
 
-    @Embedded
-    private MethodType methodType;
+    @Column
+    private String methodType;
 
-    @Embedded
-    private ItemCategory itemCategory;
+    @Column
+    private String itemCategory;
 
-    @Embedded
-    private Region region;
+    @Column
+    private String region;
 }

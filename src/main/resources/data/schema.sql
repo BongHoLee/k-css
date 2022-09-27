@@ -2,7 +2,7 @@ create table if not exists account
 (
     account_id bigint auto_increment primary key,
     age        int          not null,
-    residence  varchar(255) null
+    residence2  varchar(255) null
 );
 
 create table if not exists payment

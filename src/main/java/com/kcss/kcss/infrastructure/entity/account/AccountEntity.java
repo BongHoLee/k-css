@@ -1,7 +1,6 @@
 package com.kcss.kcss.infrastructure.entity.account;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,14 +22,14 @@ public class AccountEntity {
     @Column(name = "accountId")
     private Long id;
 
-    @Embedded
-    private Residence residence;
+    @Column
+    private String residence;
 
-    @Embedded
-    private Age age;
+    @Column
+    private Long age;
 
     @Builder
-    public AccountEntity(Long id, Residence residence, Age age) {
+    public AccountEntity(Long id, String residence, Long age) {
         this.id = id;
         this.residence = residence;
         this.age = age;

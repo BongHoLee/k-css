@@ -1,17 +1,15 @@
-package com.kcss.kcss.infrastructure.entity.payment;
+package com.kcss.kcss.domain.model.payment.vo;
 
-import javax.persistence.Embeddable;
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @EqualsAndHashCode
-@Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Slf4j
 public class Amount {
     private Double amount;
+
+    private Amount() {}
 
     private Amount(Double amount) {
         validation(amount);
@@ -22,6 +20,9 @@ public class Amount {
         return of(this.amount + otherAmount.amount);
     }
 
+    public Amount subtract(Amount otherAmount) {
+        return of(this.amount - otherAmount.amount);
+    }
     private void validation(Double amount) {
         if (amount < 0) {
             log.error("amount cannot be less than 0");

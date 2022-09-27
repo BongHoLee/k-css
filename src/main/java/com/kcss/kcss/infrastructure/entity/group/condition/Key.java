@@ -10,13 +10,13 @@ import java.util.function.Function;
 
 // Key에 대한 Expression과 Type으로 변환해주는 책임
 public enum Key {
-    REGION("region", paymentEntity.region.region, value -> value),
-    RESIDENCE("residence", paymentEntity.account.residence.residence, value -> value),
-    METHOD_TYPE("methodType", paymentEntity.methodType.methodType, value -> value),
-    ITEM_CATEGORY("itemCategory", paymentEntity.itemCategory.itemCategory, value -> value),
+    REGION("region", paymentEntity.region, value -> value),
+    RESIDENCE("residence", paymentEntity.account.residence, value -> value),
+    METHOD_TYPE("methodType", paymentEntity.methodType, value -> value),
+    ITEM_CATEGORY("itemCategory", paymentEntity.itemCategory, value -> value),
     ACCOUNT_ID("accountId", accountEntity.id, Long::parseLong),
-    AMOUNT("amount", paymentEntity.amount.amount, Double::parseDouble),
-    AGE("age", accountEntity.age.age, Long::parseLong)
+    AMOUNT("amount", paymentEntity.amount, Double::parseDouble),
+    AGE("age", accountEntity.age, Long::parseLong)
     ;
 
     private final String keyName;

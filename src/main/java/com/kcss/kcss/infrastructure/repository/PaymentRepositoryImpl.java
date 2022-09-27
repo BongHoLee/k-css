@@ -21,7 +21,7 @@ public class PaymentRepositoryImpl {
     public List<PaymentEntity> findAll(Condition condition) {
         return queryFactory.selectFrom(paymentEntity)
                 .innerJoin(paymentEntity.account, accountEntity)
-                .where(paymentEntity.region.region.ne(accountEntity.residence.residence))
+                .where(paymentEntity.region.ne(accountEntity.residence))
                 .fetch();
     }
 }

@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.kcss.kcss.infrastructure.entity.payment.ItemCategory;
 import com.kcss.kcss.infrastructure.entity.payment.MethodType;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -41,8 +42,8 @@ class ConditionTest {
 
         assertThat(fetch).hasSize(37);
         for (PaymentEntity entity : fetch) {
-            assertThat(entity.getMethodType()).isEqualTo(new MethodType("송금"));
-            assertThat(entity.getRegion().getRegion()).isNotEqualTo(entity.getAccount().getResidence().getResidence());
+            assertThat(entity.getMethodType()).isEqualTo("송금");
+            assertThat(entity.getRegion()).isNotEqualTo(entity.getAccount().getResidence());
         }
     }
 
@@ -59,8 +60,9 @@ class ConditionTest {
                 .fetch();
 
         for (PaymentEntity entity : fetch) {
-            assertThat(entity.getItemCategory()).isEqualTo(new ItemCategory("패션"));
-            assertThat(entity.getAccount().getAge().getAge()).isGreaterThanOrEqualTo(30).isLessThanOrEqualTo(60);
+            System.out.println(entity.getAccount().getAge());
+            assertThat(entity.getItemCategory()).isEqualTo("패션");
+            assertThat(entity.getAccount().getAge()).isGreaterThanOrEqualTo(30L).isLessThanOrEqualTo(60L);
         }
     }
 
@@ -76,7 +78,28 @@ class ConditionTest {
                 .fetch();
 
         for (PaymentEntity entity : fetch) {
-            assertThat(entity.getMethodType()).isEqualTo(new MethodType("카드"));
+            assertThat(entity.getMethodType()).isEqualTo("카드");
         }
+    }
+
+    @Test
+    void test() {
+        Condition c1 = new Condition(Key.AMOUNT, Operator.BETWEEN, new Value("[100000, 999999]"));
+        Condition c2 = new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("카드"));
+
+        List<Tuple> fetch = queryFactory.select(
+                        paymentEntity.count(),
+                        paymentEntity.amount.sum(),
+                        paymentEntity.amount.avg(),
+                        paymentEntity.amount.min(),
+                        paymentEntity.amount.max())
+                .from(paymentEntity)
+                .innerJoin(paymentEntity.account, accountEntity)
+                .where(c1.operate(), c2.operate())
+                .fetch();
+
+        System.out.println(fetch);
+
+
     }
 }
