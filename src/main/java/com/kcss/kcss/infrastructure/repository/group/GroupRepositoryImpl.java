@@ -5,7 +5,7 @@ import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.payment
 
 import com.kcss.kcss.domain.model.group.Group;
 import com.kcss.kcss.domain.model.group.Statistics;
-import com.kcss.kcss.domain.repository.GroupRepository;
+import com.kcss.kcss.domain.repository.group.GroupRepository;
 import com.kcss.kcss.infrastructure.entity.group.GroupEntity;
 import com.kcss.kcss.infrastructure.entity.group.StatisticsDO;
 import com.querydsl.core.types.Projections;

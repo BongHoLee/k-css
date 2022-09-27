@@ -27,6 +27,9 @@ public class Amount {
             throw new IllegalStateException("amount cannot be less than 0");
         }
     }
+    public Double amount() {
+        return this.amount;
+    }
     public static Amount of(Double amount) {
         return new Amount(amount);
     }

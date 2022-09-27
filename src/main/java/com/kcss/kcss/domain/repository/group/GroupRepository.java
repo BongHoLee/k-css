@@ -1,4 +1,4 @@
-package com.kcss.kcss.domain.repository;
+package com.kcss.kcss.domain.repository.group;
 
 import com.kcss.kcss.domain.model.group.Group;
 import com.kcss.kcss.domain.model.group.Statistics;

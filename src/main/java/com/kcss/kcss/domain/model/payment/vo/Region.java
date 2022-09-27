@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.payment.vo;
 
 
+import java.util.Arrays;
+
 public enum Region {
 
     SEOUL("서울"), BUSAN("부산"), DAEGU("대구"), INCHEON("인천"), KWANGJU("광주"),
@@ -17,5 +19,12 @@ public enum Region {
 
     public String regionName() {
         return this.regionName;
+    }
+
+    public static Region of(String regionName) {
+        return Arrays.stream(Region.values())
+                .filter(region -> region.regionName().equals(regionName))
+                .findFirst()
+                .orElseThrow();
     }
 }

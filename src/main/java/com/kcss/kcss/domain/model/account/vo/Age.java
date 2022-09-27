@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Getter
 @EqualsAndHashCode
 public class Age {
     private final Long age;
@@ -20,6 +19,10 @@ public class Age {
             log.error("not valid age : {} ", age);
             throw new IllegalArgumentException("not valid age" + age);
         }
+    }
+
+    public Long age() {
+        return age;
     }
 
     public static Age of(Long age) {
