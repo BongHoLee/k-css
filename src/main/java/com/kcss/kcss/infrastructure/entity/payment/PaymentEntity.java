@@ -26,7 +26,7 @@ public class PaymentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "accountId")
-    private AccountEntity account;
+    private AccountEntity accountEntity;
 
     @Column
     private Double amount;

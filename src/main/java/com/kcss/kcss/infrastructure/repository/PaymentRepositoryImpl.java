@@ -20,7 +20,7 @@ public class PaymentRepositoryImpl {
 
     public List<PaymentEntity> findAll(QslCondition qslCondition) {
         return queryFactory.selectFrom(paymentEntity)
-                .innerJoin(paymentEntity.account, accountEntity)
+                .innerJoin(paymentEntity.accountEntity, accountEntity)
                 .where(paymentEntity.region.ne(accountEntity.residence))
                 .fetch();
     }

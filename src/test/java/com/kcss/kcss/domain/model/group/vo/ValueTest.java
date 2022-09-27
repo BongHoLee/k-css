@@ -23,6 +23,7 @@ class ValueTest {
     void 허용된_문자외_특수문자_예외테스트() {
         assertDoesNotThrow(() -> {new Value("[a1, a2, a3]");});
         assertDoesNotThrow(() -> {new Value("$a");});
+
         assertThatThrownBy(() -> {new Value("#a") ;}).hasMessageContaining(EXCEPTION_MESSAGE);
         assertThatThrownBy(() -> {new Value("*a") ;}).hasMessageContaining(EXCEPTION_MESSAGE);
         assertThatThrownBy(() -> {new Value(".a") ;}).hasMessageContaining(EXCEPTION_MESSAGE);

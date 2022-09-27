@@ -1,13 +1,11 @@
-package com.kcss.kcss.domain.model.group;
+package com.kcss.kcss.infrastructure.entity.group;
 
+import com.kcss.kcss.domain.model.group.Group;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Getter
-public class Statistics {
-    private final Group group;
+public class StatisticsDO {
     private final Long count;
     private final Double totalAmount;
     private final Double avgAmount;
@@ -15,8 +13,7 @@ public class Statistics {
     private final Double maxAmount;
 
     @Builder
-    public Statistics(Group group, Long count, Double totalAmount, Double avgAmount, Double minAmount, Double maxAmount) {
-        this.group = group;
+    public StatisticsDO(Long count, Double totalAmount, Double avgAmount, Double minAmount, Double maxAmount) {
         this.count = count;
         this.totalAmount = totalAmount;
         this.avgAmount = avgAmount;

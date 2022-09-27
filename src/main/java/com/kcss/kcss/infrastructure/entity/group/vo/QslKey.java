@@ -11,7 +11,7 @@ import java.util.function.Function;
 // Key에 대한 Expression과 Type으로 변환해주는 책임
 public enum QslKey {
     REGION("region", paymentEntity.region, value -> value),
-    RESIDENCE("residence", paymentEntity.account.residence, value -> value),
+    RESIDENCE("residence", accountEntity.residence, value -> value),
     METHOD_TYPE("methodType", paymentEntity.methodType, value -> value),
     ITEM_CATEGORY("itemCategory", paymentEntity.itemCategory, value -> value),
     ACCOUNT_ID("accountId", accountEntity.id, Long::parseLong),
@@ -21,7 +21,6 @@ public enum QslKey {
 
     private final String keyName;
     private final Expression<?> expression;
-
     private final Function<String, Object> converter;
 
     QslKey(String keyName, Expression<?> expression, Function<String, Object> converter) {

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Ops;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -50,6 +51,13 @@ public enum QslOperator {
     @JsonValue
     public String getOperatorName() {
         return operatorName;
+    }
+
+    public static QslOperator of(String operatorName) {
+        return Arrays.stream(QslOperator.values())
+                .filter(key -> key.getOperatorName().equals(operatorName))
+                .findFirst()
+                .orElseThrow();
     }
 
     private static Expression<?>[] generalOperatingExpressionsOf(QslKey qslKey, QslValue value) {

@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class QslConditionJsonConverterTest {
+class ConditionJsonConverterTest {
 
     @Test
     @DisplayName("Condition JSON 간 상호 변환 테스트")
