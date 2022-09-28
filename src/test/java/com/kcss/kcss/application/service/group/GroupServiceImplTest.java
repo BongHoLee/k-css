@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.repository.group;
+package com.kcss.kcss.application.service.group;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,16 +8,9 @@ import com.kcss.kcss.domain.model.group.vo.Condition;
 import com.kcss.kcss.domain.model.group.vo.Key;
 import com.kcss.kcss.domain.model.group.vo.Operator;
 import com.kcss.kcss.domain.model.group.vo.Value;
-import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
-import com.kcss.kcss.infrastructure.entity.group.vo.QslKey;
-import com.kcss.kcss.infrastructure.entity.group.vo.QslOperator;
-import com.kcss.kcss.infrastructure.entity.group.vo.QslValue;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("test")
 @Transactional
 @SpringBootTest
-class GroupRepositoryImplTest {
+class GroupServiceImplTest {
 
     @Autowired
-    private GroupRepositoryImpl groupRepository;
+    GroupServiceImpl groupService;
 
     @Test
-    @DisplayName("1개 Condition을 가진 GroupEntity 영속화 테스트")
-    void 단일_조건_그룹_영속화_테스트() {
+    @DisplayName("1개 Condition을 가진 Group 저장")
+    void 단일_조건_그룹_저장_테스트() {
         List<Condition> conditions = new ArrayList<>(Arrays.asList(
                 new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금"))
         ));
@@ -48,12 +41,9 @@ class GroupRepositoryImplTest {
                 .conditions(conditions)
                 .build();
 
-        Group saved = groupRepository.save(group);
-        Optional<Group> foundGroup = groupRepository.findById(saved.getId());
-
-        assertThat(foundGroup).isPresent();
-        assertThat(foundGroup.get().getConditions()).isEqualTo(conditions);
-        assertThat(foundGroup.get().getDescription()).isEqualTo(description);
+        Group saved = groupService.register(group);
+        assertThat(saved.getId()).isNotNull();
+        assertThat(saved.getConditions()).isEqualTo(conditions);
     }
 
 
@@ -70,12 +60,10 @@ class GroupRepositoryImplTest {
                 .conditions(conditions)
                 .build();
 
-        Group saved = groupRepository.save(group);
-        Optional<Group> foundGroup = groupRepository.findById(saved.getId());
+        Group saved = groupService.register(group);
 
-        assertThat(foundGroup).isPresent();
-        assertThat(foundGroup.get().getConditions()).isEqualTo(conditions);
-        assertThat(foundGroup.get().getDescription()).isEqualTo(description);
+        assertThat(saved.getConditions()).isEqualTo(conditions);
+        assertThat(saved.getDescription()).isEqualTo(description);
     }
 
 
@@ -92,14 +80,14 @@ class GroupRepositoryImplTest {
         Group group2 = Group.builder()
                 .description("거주지역 외 송금 결제")
                 .conditions(new ArrayList<>(Arrays.asList(
-                                new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금")),
-                                new Condition(Key.RESIDENCE, Operator.IN, new Value("$region")))))
+                        new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금")),
+                        new Condition(Key.RESIDENCE, Operator.IN, new Value("$region")))))
                 .build();
 
-        Group firstSaved = groupRepository.save(group1);
-        Group secondSaved = groupRepository.save(group2);
+        Group firstSaved = groupService.register(group1);
+        Group secondSaved = groupService.register(group2);
 
-        List<Group> all = groupRepository.findAll();
+        List<Group> all = groupService.findAllRegistered();
 
         assertThat(all).hasSize(2);
         assertThat(all.get(0)).isEqualTo(firstSaved);
@@ -153,7 +141,6 @@ class GroupRepositoryImplTest {
                 .description("desc")
                 .build();
 
-        return groupRepository.statisticsOf(group);
+        return groupService.statisticsOf(group);
     }
 }
-

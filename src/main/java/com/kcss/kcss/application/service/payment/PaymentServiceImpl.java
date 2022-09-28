@@ -1,9 +1,9 @@
-package com.kcss.kcss.application.service;
+package com.kcss.kcss.application.service.payment;
 
 import com.kcss.kcss.application.error.ApplicationErrorCode;
 import com.kcss.kcss.domain.model.payment.Payment;
 import com.kcss.kcss.domain.repository.payment.PaymentRepository;
-import com.kcss.kcss.domain.service.PaymentService;
+import com.kcss.kcss.domain.service.payment.PaymentService;
 import com.kcss.kcss.global.error.BusinessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

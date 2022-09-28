@@ -4,24 +4,24 @@ import com.kcss.kcss.domain.model.payment.Payment;
 import com.kcss.kcss.domain.repository.payment.PaymentRepository;
 import com.kcss.kcss.infrastructure.entity.payment.PaymentEntity;
 import java.util.Optional;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PaymentRepositoryImpl implements PaymentRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final JpaPaymentRepository jpaRepository;
+
+    public PaymentRepositoryImpl(JpaPaymentRepository jpaRepository) {
+        this.jpaRepository = jpaRepository;
+    }
 
     @Override
-    public void save(Payment payment) {
-        entityManager.persist(PaymentEntity.from(payment));
+    public Payment save(Payment payment) {
+        return jpaRepository.save(PaymentEntity.from(payment)).convert();
     }
 
     @Override
     public Optional<Payment> findById(Long id) {
-        return Optional.of(entityManager.find(PaymentEntity.class, id)).map(PaymentEntity::convert);
-
+        return jpaRepository.findById(id).map(PaymentEntity::convert);
     }
 }

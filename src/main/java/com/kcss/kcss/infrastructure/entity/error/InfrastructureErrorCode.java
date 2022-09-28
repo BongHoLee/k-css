@@ -21,16 +21,16 @@ public enum InfrastructureErrorCode implements ErrorCode{
 
     @Override
     public String getMessage() {
-        return null;
+        return this.message;
     }
 
     @Override
     public String getCode() {
-        return null;
+        return this.code;
     }
 
     @Override
     public int getStatus() {
-        return 0;
+        return this.status;
     }
 }

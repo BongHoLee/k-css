@@ -1,4 +1,4 @@
-package com.kcss.kcss.domain.service;
+package com.kcss.kcss.domain.service.payment;
 
 import com.kcss.kcss.domain.model.payment.Payment;
 

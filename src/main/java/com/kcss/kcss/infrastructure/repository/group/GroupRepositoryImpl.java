@@ -2,6 +2,7 @@ package com.kcss.kcss.infrastructure.repository.group;
 
 import static com.kcss.kcss.infrastructure.entity.account.QAccountEntity.accountEntity;
 import static com.kcss.kcss.infrastructure.entity.payment.QPaymentEntity.paymentEntity;
+import static java.util.stream.Collectors.toList;
 
 import com.kcss.kcss.domain.model.group.Group;
 import com.kcss.kcss.domain.model.group.Statistics;
@@ -10,6 +11,7 @@ import com.kcss.kcss.infrastructure.entity.group.GroupEntity;
 import com.kcss.kcss.infrastructure.entity.group.StatisticsDO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +36,11 @@ public class GroupRepositoryImpl implements GroupRepository {
     public Optional<Group> findById(Long id) {
         Optional<GroupEntity> findEntity = jpaRepository.findById(id);
         return findEntity.map(GroupEntity::convert);
+    }
+
+    @Override
+    public List<Group>findAll() {
+        return jpaRepository.findAll().stream().map(GroupEntity::convert).collect(toList());
     }
 
     @Override

@@ -24,16 +24,16 @@ public enum ApplicationErrorCode implements ErrorCode{
 
     @Override
     public String getMessage() {
-        return null;
+        return this.code;
     }
 
     @Override
     public String getCode() {
-        return null;
+        return this.message;
     }
 
     @Override
     public int getStatus() {
-        return 0;
+        return this.status;
     }
 }
