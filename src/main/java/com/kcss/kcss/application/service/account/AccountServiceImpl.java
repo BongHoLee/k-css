@@ -16,11 +16,10 @@ public class AccountServiceImpl implements AccountService {
 
     public AccountServiceImpl(AccountRepository repository) {
         this.repository = repository;
-
     }
 
     @Override
-    public Account save(Account account) {
+    public Account register(Account account) {
         return repository.save(account);
     }
 

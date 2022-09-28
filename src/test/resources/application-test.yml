@@ -1,4 +1,7 @@
 spring:
+  servlet:
+    encoding:
+      force-response: true
   jpa:
     hibernate:
       ddl-auto: none

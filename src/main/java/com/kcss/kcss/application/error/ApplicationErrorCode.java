@@ -24,12 +24,12 @@ public enum ApplicationErrorCode implements ErrorCode{
 
     @Override
     public String getMessage() {
-        return this.code;
+        return this.message;
     }
 
     @Override
     public String getCode() {
-        return this.message;
+        return this.code;
     }
 
     @Override
