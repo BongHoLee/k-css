@@ -4,6 +4,6 @@ import com.kcss.kcss.domain.model.account.Account;
 import java.util.Optional;
 
 public interface AccountRepository {
-    Account save(Account account);
+    void save(Account account);
     Optional<Account> findById(Long id);
 }

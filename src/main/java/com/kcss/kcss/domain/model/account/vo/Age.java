@@ -16,7 +16,7 @@ public class Age {
     }
 
     private void validation(Long age) {
-        if (age == null || age < 1) {
+        if (age == null || age < 0) {
             log.error("not valid age : {} ", age);
             throw new BusinessException(DomainErrorCode.NOT_VALID_AGE);
         }

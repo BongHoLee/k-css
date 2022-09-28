@@ -7,6 +7,7 @@ import com.kcss.kcss.domain.model.account.Account;
 import com.kcss.kcss.domain.model.account.vo.Age;
 import com.kcss.kcss.domain.model.account.vo.Residence;
 import java.util.Optional;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +27,25 @@ class AccountRepositoryImplTest {
     private AccountRepositoryImpl accountRepository;
 
     @Test
-    @DisplayName("Account 영속화 및 반환 테스트")
-    void Account_save_and_findById_테스트() {
+    @DisplayName("Account 영속화 테스트")
+    void Account_save__테스트() {
         Account account = Account.builder()
                 .age(Age.of(39L))
                 .residence(Residence.DAEJEON)
                 .build();
 
-        Account saved = accountRepository.save(account);
-        Optional<Account> found = accountRepository.findById(saved.getId());
+        Assertions.assertDoesNotThrow(() -> accountRepository.save(account));
+    }
+
+    @Test
+    @DisplayName("Account 반환 테스트")
+    void Account_findById_테스트() {
+        Optional<Account> found = accountRepository.findById(2L);
 
         assertThat(found).isPresent();
-        assertThat(found.get().getId()).isNotZero();
-        assertThat(found.get().getResidence()).isEqualTo(account.getResidence());
-        assertThat(found.get().getAge()).isEqualTo(account.getAge());
+        assertThat(found.get().getId()).isEqualTo(2L);
+        assertThat(found.get().getResidence()).isEqualTo(Residence.SEJONG);
+        assertThat(found.get().getAge()).isEqualTo(Age.of(73L));
+        assertThat(found.get().getPayments()).hasSize(3);
     }
 }

@@ -1,7 +1,12 @@
 package com.kcss.kcss.domain.model.account;
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
 import com.kcss.kcss.domain.model.account.vo.Age;
 import com.kcss.kcss.domain.model.account.vo.Residence;
+import com.kcss.kcss.domain.model.payment.Payment;
+import com.kcss.kcss.global.error.BusinessException;
+import java.util.Collections;
+import java.util.List;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,12 +19,20 @@ public class Account {
     private final Long id;
     private final Age age;
     private final Residence residence;
+    private final List<Payment> payments;
 
     @Builder
-    public Account(Long id, Age age, Residence residence) {
+    public Account(Long id, Age age, Residence residence, List<Payment> payments) {
         this.id = id;
         this.residence = residence;
         this.age = age;
+        this.payments = payments == null ? Collections.emptyList() : payments;
     }
 
+    private void validation(Long id) {
+        if (id == null) {
+            log.error("Account id cannot be null");
+            throw new BusinessException(DomainErrorCode.NOT_VALID_ID);
+        }
+    }
 }

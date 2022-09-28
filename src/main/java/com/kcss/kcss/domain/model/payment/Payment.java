@@ -27,7 +27,7 @@ public class Payment {
     @Builder
     public Payment(
             Long id, Account account, Amount amount, MethodType methodType, ItemCategory itemCategory, Region region) {
-        validation(account, amount, methodType, itemCategory, region);
+        validation(id);
         this.id = id;
         this.account = account;
         this.amount = amount;
@@ -36,10 +36,10 @@ public class Payment {
         this.region = region;
     }
 
-    private void validation(Account account, Amount amount, MethodType methodType, ItemCategory itemCategory, Region region) {
-        if (account == null || amount == null || methodType == null || itemCategory == null || region == null) {
-            log.error("Payment should be stable");
-            throw new BusinessException(DomainErrorCode.NOT_SUPPORT_VALUE_PATTERN);
+    private void validation(Long id) {
+        if (id == null) {
+            log.error("payment id cannot be null");
+            throw new BusinessException(DomainErrorCode.NOT_VALID_ID);
         }
     }
 }

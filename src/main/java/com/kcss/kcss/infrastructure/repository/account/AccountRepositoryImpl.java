@@ -4,6 +4,8 @@ import com.kcss.kcss.domain.model.account.Account;
 import com.kcss.kcss.domain.repository.account.AccountRepository;
 import com.kcss.kcss.infrastructure.entity.account.AccountEntity;
 import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,7 +18,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account save(Account account) {
+    public void save(Account account) {
         return jpaRepository.save(AccountEntity.from(account)).convert();
     }
 

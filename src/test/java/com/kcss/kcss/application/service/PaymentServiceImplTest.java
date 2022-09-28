@@ -1,0 +1,50 @@
+package com.kcss.kcss.application.service;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import com.kcss.kcss.domain.model.account.Account;
+import com.kcss.kcss.domain.model.payment.Payment;
+import com.kcss.kcss.domain.model.payment.vo.Amount;
+import com.kcss.kcss.domain.model.payment.vo.ItemCategory;
+import com.kcss.kcss.domain.model.payment.vo.MethodType;
+import com.kcss.kcss.domain.model.payment.vo.Region;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+
+@Sql("/data/schema.sql")
+@Sql("/data/data.sql")
+@ActiveProfiles("test")
+@SpringBootTest
+class PaymentServiceImplTest {
+
+    @Autowired
+    private PaymentServiceImpl paymentService;
+
+    @Test
+    @DisplayName("결제 정상 처리 테스트")
+    void 결제_발행_정상_처리_테스트() {
+        Payment payment = Payment.builder()
+                .id(1000L)
+                .amount(Amount.of(30000.0))
+                .itemCategory(ItemCategory.BEAUTY)
+                .methodType(MethodType.CARD)
+                .region(Region.BUSAN)
+                .account(Account.builder().id(500L).build())
+                .build();
+
+        assertDoesNotThrow(() -> paymentService.pay(payment));
+    }
+
+    @Test
+    @DisplayName("결제내역 반환 정상 처리 테스트")
+    void 결제_내역_반환_정상_처리_테스트() {
+        Payment payment = paymentService.paymentOf(2L);
+        assertThat(payment.getId()).isEqualTo(2L);
+    }
+
+}
