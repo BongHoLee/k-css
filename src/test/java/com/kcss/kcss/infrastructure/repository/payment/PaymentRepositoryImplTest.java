@@ -38,18 +38,16 @@ class PaymentRepositoryImplTest {
     @Autowired
     private AccountRepositoryImpl accountRepository;
 
-    @PersistenceContext
-    private EntityManager em;
 
     @Test
     @DisplayName("Payment 영속화 테스트")
-    void Payment_save__테스트() {
-        Account account = Account.builder().id(1000L).age(Age.of(30L)).residence(Residence.BUSAN).build();
-        accountRepository.save(account);
+    void Payment_save_테스트() {
+        Account account = Account.builder().age(Age.of(30L)).residence(Residence.BUSAN).build();
+        Account savedAccount = accountRepository.save(account);
 
         Payment payment = Payment.builder()
                 .id(1000L)
-                .account(account)
+                .account(savedAccount)
                 .amount(Amount.of(30.0))
                 .itemCategory(ItemCategory.BOOK)
                 .methodType(MethodType.CARD)
@@ -59,24 +57,10 @@ class PaymentRepositoryImplTest {
         paymentRepository.save(payment);
     }
 
-
     @Test
-    @DisplayName("Payment 영속화 및 반환 테스트")
+    @DisplayName("Payment 반환 테스트")
     void Payment_save_and_findById_테스트() {
-        Account account = Account.builder().age(Age.of(30L)).residence(Residence.BUSAN).build();
-        Account savedAccount = accountRepository.save(account);
-
-        Payment payment = Payment.builder()
-                .account(savedAccount)
-                .amount(Amount.of(30.0))
-                .itemCategory(ItemCategory.BOOK)
-                .methodType(MethodType.CARD)
-                .region(Region.CHUNGNAM)
-                .build();
-
-
         Optional<Payment> found = paymentRepository.findById(2L);
-
         assertThat(found).isPresent();
         assertThat(found.get().getId()).isNotZero();
     }

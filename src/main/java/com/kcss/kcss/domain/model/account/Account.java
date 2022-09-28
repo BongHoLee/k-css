@@ -1,10 +1,8 @@
 package com.kcss.kcss.domain.model.account;
 
-import com.kcss.kcss.domain.error.DomainErrorCode;
 import com.kcss.kcss.domain.model.account.vo.Age;
 import com.kcss.kcss.domain.model.account.vo.Residence;
 import com.kcss.kcss.domain.model.payment.Payment;
-import com.kcss.kcss.global.error.BusinessException;
 import java.util.Collections;
 import java.util.List;
 import lombok.Builder;
@@ -29,10 +27,4 @@ public class Account {
         this.payments = payments == null ? Collections.emptyList() : payments;
     }
 
-    private void validation(Long id) {
-        if (id == null) {
-            log.error("Account id cannot be null");
-            throw new BusinessException(DomainErrorCode.NOT_VALID_ID);
-        }
-    }
 }

@@ -34,6 +34,7 @@ import lombok.NoArgsConstructor;
 public class AccountEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accountId")
     private Long id;
 

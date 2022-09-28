@@ -10,14 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PaymentRepositoryImpl implements PaymentRepository {
-    private final JpaPaymentRepository jpaRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    public PaymentRepositoryImpl(JpaPaymentRepository jpaRepository) {
-        this.jpaRepository = jpaRepository;
-    }
 
     @Override
     public void save(Payment payment) {
@@ -26,7 +21,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Optional<Payment> findById(Long id) {
-        Optional<PaymentEntity> findEntity = jpaRepository.findById(id);
-        return findEntity.map(PaymentEntity::convert);
+        return Optional.of(entityManager.find(PaymentEntity.class, id)).map(PaymentEntity::convert);
+
     }
 }

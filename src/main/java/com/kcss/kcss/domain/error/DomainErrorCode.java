@@ -3,8 +3,6 @@ package com.kcss.kcss.domain.error;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kcss.kcss.global.error.ErrorCode;
 
-
-
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum DomainErrorCode implements ErrorCode {
 
