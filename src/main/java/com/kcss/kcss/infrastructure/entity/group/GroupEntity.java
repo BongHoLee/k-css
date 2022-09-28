@@ -3,11 +3,10 @@ package com.kcss.kcss.infrastructure.entity.group;
 import static java.util.stream.Collectors.toList;
 
 import com.kcss.kcss.domain.model.group.Group;
-import com.kcss.kcss.infrastructure.common.converter.ConditionJsonConverter;
+import com.kcss.kcss.infrastructure.converter.ConditionJsonConverter;
 import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;

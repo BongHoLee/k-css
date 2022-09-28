@@ -3,7 +3,6 @@ package com.kcss.kcss.infrastructure.converter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.kcss.kcss.infrastructure.common.converter.ConditionJsonConverter;
 import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
 import com.kcss.kcss.infrastructure.entity.group.vo.QslKey;
 import com.kcss.kcss.infrastructure.entity.group.vo.QslOperator;

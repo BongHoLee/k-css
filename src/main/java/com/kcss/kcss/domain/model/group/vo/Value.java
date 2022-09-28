@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.group.vo;
 
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class Value {
     private void validation(String value) {
         if (value == null || NOT_VALID_PATTERN.matcher(value).find() || !isValidMultiValue(value)) {
             log.error("not support value pattern : {}", value);
-            throw new IllegalArgumentException("not support value pattern : " + value);
+            throw new BusinessException("not support value pattern : " + value, DomainErrorCode.NOT_SUPPORT_VALUE_PATTERN);
         }
     }
 

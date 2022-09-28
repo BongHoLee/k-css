@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.group.vo;
 
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +27,7 @@ public class Condition {
     private void validation(Key key, Operator operator, Value value) {
         if (key == null || operator == null || value == null) {
             log.error("Condition should be stable");
-            throw new IllegalArgumentException("Condition should be stable");
+            throw new BusinessException(DomainErrorCode.NOT_STABLE_CONDITION);
         }
     }
 }

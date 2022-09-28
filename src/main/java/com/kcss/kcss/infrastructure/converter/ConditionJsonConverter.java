@@ -1,4 +1,4 @@
-package com.kcss.kcss.infrastructure.common.converter;
+package com.kcss.kcss.infrastructure.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

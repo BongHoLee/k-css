@@ -1,7 +1,8 @@
 package com.kcss.kcss.domain.model.account.vo;
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,7 +18,7 @@ public class Age {
     private void validation(Long age) {
         if (age == null || age < 1) {
             log.error("not valid age : {} ", age);
-            throw new IllegalArgumentException("not valid age" + age);
+            throw new BusinessException(DomainErrorCode.NOT_VALID_AGE);
         }
     }
 
