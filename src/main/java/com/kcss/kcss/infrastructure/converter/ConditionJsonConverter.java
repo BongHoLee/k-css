@@ -7,9 +7,11 @@ import com.kcss.kcss.infrastructure.entity.group.vo.QslCondition;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Converter
 public class ConditionJsonConverter implements AttributeConverter<List<QslCondition>, String> {
     private final ObjectMapper mapper = new ObjectMapper();
 

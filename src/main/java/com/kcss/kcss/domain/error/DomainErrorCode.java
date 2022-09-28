@@ -10,6 +10,7 @@ public enum DomainErrorCode implements ErrorCode {
 
     // Account domain model
     NOT_VALID_AGE(1001, "A001", " not valid age"),
+    NOT_SUPPORT_RESIDENCE(1002, "A002", " not support residence"),
 
     // Group domain model
     NOT_STABLE_CONDITION(2001, "G001", " condition should be stable"),

@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.account.vo;
 
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import java.util.Arrays;
 
 public enum Residence {
@@ -24,6 +26,6 @@ public enum Residence {
         return Arrays.stream(Residence.values())
                 .filter(residence -> residence.residenceName().equals(residenceName))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new BusinessException("not support residence : " + residenceName, DomainErrorCode.NOT_SUPPORT_RESIDENCE));
     }
 }
