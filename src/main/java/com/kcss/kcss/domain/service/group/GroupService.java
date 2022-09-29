@@ -10,5 +10,5 @@ public interface GroupService {
 
     void remove(Long id);
     List<Group> findAllRegistered();
-    Statistics statisticsOf(Group group);
+    Statistics statisticsOf(Long id);
 }

@@ -10,5 +10,5 @@ public interface GroupRepository {
     void removeFor(Long id);
     Optional<Group> findById(Long id);
     List<Group> findAll();
-    Statistics statisticsOf(Group group);
+    Statistics statisticsOf(Long id);
 }

@@ -144,7 +144,7 @@ class GroupServiceImplTest {
                 .conditions(conditions)
                 .description("desc")
                 .build();
-
-        return groupService.statisticsOf(group);
+        groupService.register(group);
+        return groupService.statisticsOf(group.getId());
     }
 }

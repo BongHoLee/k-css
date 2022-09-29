@@ -156,8 +156,8 @@ class GroupRepositoryImplTest {
                 .conditions(conditions)
                 .description("desc")
                 .build();
-
-        return groupRepository.statisticsOf(group);
+        groupRepository.save(group);
+        return groupRepository.statisticsOf(group.getId());
     }
 }
 

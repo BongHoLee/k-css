@@ -57,7 +57,8 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
-    public Statistics statisticsOf(Group group) {
+    public Statistics statisticsOf(Long id) {
+        Group group = findById(id).orElseThrow(() -> new BusinessException(InfrastructureErrorCode.NOT_VALID_ID));
 
         StatisticsDO statisticsDO = queryFactory.select(
                 Projections.constructor(StatisticsDO.class,

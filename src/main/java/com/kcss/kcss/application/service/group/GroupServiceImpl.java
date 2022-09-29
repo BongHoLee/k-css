@@ -45,7 +45,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Statistics statisticsOf(Group group) {
-        return  repository.statisticsOf(group);
+    public Statistics statisticsOf(Long id) {
+        return repository.statisticsOf(id);
     }
+
 }
