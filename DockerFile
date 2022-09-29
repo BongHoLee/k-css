@@ -1,0 +1,23 @@
+FROM openjdk:11-jdk
+ARG JAR_FILE=build/libs/k-css-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} k-css.jar
+EXPOSE 8080
+ENTRYPOINT  ["java", "-Dspring.profiles.active=docker", "-jar", "/k-css.jar"]
+
+
+#FROM openjdk:11-jdk AS builder
+#ENV APP_HOME=/home/app/
+#COPY gradlew $APP_HOME
+#COPY build.gradle $APP_HOME
+#COPY settings.gradle $APP_HOME
+#COPY gradle $APP_HOME/gradle
+#COPY src $APP_HOME/src
+#RUN chmod +x $APP_HOME/gradlew
+#RUN ./home/app/gradlew bootJar
+#
+#
+#FROM openjdk:11-jdk
+#ARG JAR_FILE=build/libs/location_api-0.0.1-SNAPSHOT.jar
+#COPY --from=builder ${JAR_FILE} location_api.jar
+#EXPOSE 8080
+#ENTRYPOINT  ["java", "-Dspring.profiles.active=local", "-jar", "/location_api.jar"]

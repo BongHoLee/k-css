@@ -1,6 +1,18 @@
 version: "3"
 
 services:
+  css_app:
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    restart: on-failure
+    depends_on:
+      - css_db
+
   css_db:
     image: mysql
     environment:
@@ -11,7 +23,7 @@ services:
     ports:
       - "33060:3306"
     restart: on-failure
-    command: # 명령어 실행 (한글 깨짐 방지)
+    command:
       - mysqld
       - --character-set-server=utf8
       - --collation-server=utf8_general_ci

@@ -2,10 +2,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:33060/css_db
+    url: jdbc:mysql://css_db:3306/css_db
     username: root
     password: root
     hikari:
@@ -27,4 +27,3 @@ springdoc:
     disabled: true
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
-
