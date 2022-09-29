@@ -1,0 +1,56 @@
+###
+POST http://localhost:8080/payment
+Content-Type: application/json
+
+{
+  "paymentId": 1,
+  "accountId": 1,
+  "amount": 152000.0,
+  "methodType": "송금",
+  "itemCategory": "패션",
+  "region": "충남"
+}
+
+###
+POST http://localhost:8080/payment
+Content-Type: application/json
+
+{
+  "paymentId": 2,
+  "accountId": 1,
+  "amount": 300000.0,
+  "methodType": "카드",
+  "itemCategory": "도서",
+  "region": "서울"
+}
+
+###
+POST http://localhost:8080/payment
+Content-Type: application/json
+
+{
+  "paymentId": 3,
+  "accountId": 2,
+  "amount": 305000.0,
+  "methodType": "카드",
+  "itemCategory": "스포츠",
+  "region": "제주"
+}
+
+###
+POST http://localhost:8080/payment
+Content-Type: application/json
+
+{
+  "paymentId": 4,
+  "accountId": 3,
+  "amount": 2000.0,
+  "methodType": "CARD",
+  "itemCategory": "스포츠",
+  "region": "제주"
+}
+
+### GET registerRequest with a header
+GET http://localhost:8080/payment?id=1
+Accept: application/json
+
