@@ -26,5 +26,4 @@ public class Account {
         this.age = age;
         this.payments = payments == null ? Collections.emptyList() : payments;
     }
-
 }
