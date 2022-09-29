@@ -25,7 +25,7 @@ public enum Region {
 
     public static Region of(String regionName) {
         return Arrays.stream(Region.values())
-                .filter(region -> region.regionName().equals(regionName))
+                .filter(region -> region.regionName().equals(regionName) || region.name().equals(regionName))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("not support region : " + regionName, DomainErrorCode.NOT_SUPPORT_REGION));
     }

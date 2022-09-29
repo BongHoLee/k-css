@@ -1,5 +1,9 @@
 package com.kcss.kcss.domain.model.group.vo;
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
+import java.util.Arrays;
+
 public enum Operator {
     IN("in"),
     NOT_IN("not in"),
@@ -17,5 +21,12 @@ public enum Operator {
 
     public String getOperatorName() {
         return this.operatorName;
+    }
+
+    public static Operator of(String operatorName) {
+        return Arrays.stream(Operator.values())
+                .filter(operator -> operator.getOperatorName().equals(operatorName))
+                .findFirst()
+                .orElseThrow(() -> new BusinessException("not support operator : " + operatorName, DomainErrorCode.NOT_SUPPORT_OPERATOR));
     }
 }

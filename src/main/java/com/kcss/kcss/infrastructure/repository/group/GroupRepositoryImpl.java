@@ -7,15 +7,19 @@ import static java.util.stream.Collectors.toList;
 import com.kcss.kcss.domain.model.group.Group;
 import com.kcss.kcss.domain.model.group.Statistics;
 import com.kcss.kcss.domain.repository.group.GroupRepository;
+import com.kcss.kcss.global.error.BusinessException;
+import com.kcss.kcss.infrastructure.entity.error.InfrastructureErrorCode;
 import com.kcss.kcss.infrastructure.entity.group.GroupEntity;
 import com.kcss.kcss.infrastructure.entity.group.StatisticsDO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Slf4j
 public class GroupRepositoryImpl implements GroupRepository {
 
     private final JpaGroupRepository jpaRepository;
@@ -28,8 +32,17 @@ public class GroupRepositoryImpl implements GroupRepository {
 
     @Override
     public Group save(Group group) {
+        if (jpaRepository.findById(group.getId()).isPresent()) {
+            log.error("duplicate id exception occur");
+            throw new BusinessException(InfrastructureErrorCode.DUPLICATE_ID);
+        }
         GroupEntity saved = jpaRepository.save(GroupEntity.from(group));
         return saved.convert();
+    }
+
+    @Override
+    public void removeFor(Long id) {
+        jpaRepository.deleteById(id);
     }
 
     @Override

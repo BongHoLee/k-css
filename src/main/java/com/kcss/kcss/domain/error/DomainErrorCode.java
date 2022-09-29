@@ -13,6 +13,8 @@ public enum DomainErrorCode implements ErrorCode {
     // Group domain model
     NOT_STABLE_CONDITION(2001, "G001", " condition should be stable"),
     NOT_SUPPORT_VALUE_PATTERN(2002, "G002", " not support value pattern"),
+    NOT_SUPPORT_KEY(2003, "G002", " not support key"),
+    NOT_SUPPORT_OPERATOR(2004, "G002", " not support operator"),
 
     // Payment domain model
     NOT_STABLE_PAYMENT(3001, "P001", " payment should be stable"),

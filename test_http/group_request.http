@@ -1,0 +1,70 @@
+### POST 새 그룹 등록1
+POST http://localhost:8080/group
+Content-Type: application/json
+
+{
+  "groupId": 1,
+  "description": "카드 결제",
+  "condition": [
+    {
+      "key": "methodType",
+      "operator": "equals",
+      "value": "CARD"
+    }
+  ]
+}
+
+
+### POST 새 그룹 등록2
+POST http://localhost:8080/group
+Content-Type: application/json
+
+{
+  "groupId": 2,
+  "description": "제주지역에서 1000 ~ 2000 사이 결제",
+  "condition": [
+    {
+      "key": "region",
+      "operator": "equals",
+      "value": "제주"
+    },
+    {
+      "key": "amount",
+      "operator": "between",
+      "value": "[1000, 2000]"
+    }
+  ]
+}
+
+### POST 새 그룹 등록3
+POST http://localhost:8080/group
+Content-Type: application/json
+
+{
+  "groupId": 3,
+  "description": "결제자의 거주지역외에서의 송금",
+  "condition": [
+    {
+      "key": "methodType",
+      "operator": "equals",
+      "value": "SEND"
+    },
+    {
+      "key": "residence",
+      "operator": "not equals",
+      "value": "$region"
+    }
+  ]
+}
+
+### GET 특정 그룹 조회
+GET http://localhost:8080/group?id=3
+Accept: application/json
+
+### GET 모든 그룹 조회
+GET http://localhost:8080/group
+Accept: application/json
+
+### DELETE 특정 그룹 삭제
+DELETE http://localhost:8080/group?id=3
+Accept: application/json

@@ -12,8 +12,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -27,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Table(name = "pgroup")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
-public class GroupEntity {
+public class GroupEntity{
 
     @Id
     @Column(name = "groupId")

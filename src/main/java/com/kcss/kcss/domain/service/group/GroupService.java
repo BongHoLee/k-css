@@ -7,6 +7,8 @@ import java.util.List;
 public interface GroupService {
     Group register(Group group);
     Group findGroupOf(Long id);
+
+    void remove(Long id);
     List<Group> findAllRegistered();
     Statistics statisticsOf(Group group);
 }

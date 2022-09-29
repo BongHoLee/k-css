@@ -20,16 +20,9 @@ public enum MethodType {
         return methodTypeName;
     }
 
-    public static MethodType kor(String methodTypeName) {
+    public static MethodType of (String methodTypeName) {
         return Arrays.stream(MethodType.values())
-                .filter(methodType -> methodType.methodTypeName().equals(methodTypeName))
-                .findFirst()
-                .orElseThrow(() -> new BusinessException("not support method type : " + methodTypeName, DomainErrorCode.NOT_SUPPORT_METHOD_TYPE));
-    }
-
-    public static MethodType en(String methodTypeName) {
-        return Arrays.stream(MethodType.values())
-                .filter(methodType -> methodType.name().equals(methodTypeName))
+                .filter(methodType -> methodType.methodTypeName().equals(methodTypeName) || methodType.name().equals(methodTypeName))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("not support method type : " + methodTypeName, DomainErrorCode.NOT_SUPPORT_METHOD_TYPE));
     }

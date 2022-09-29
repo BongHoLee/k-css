@@ -4,6 +4,7 @@ import com.kcss.kcss.application.dto.BaseResponse;
 import com.kcss.kcss.global.error.BusinessException;
 import com.kcss.kcss.global.error.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     /**
-     * javax.validation.Valid or @Validated 으로 binding error 시 발생
-     * HttpMessageConverter 에서 등록한 HttpMessageConverter binding 못할경우 발생
-     * 주로 @RequestBody, @RequestPart 어노테이션에서 발생
+     * javax.validation.Valid or @Validated 으로 binding error 시 발생 HttpMessageConverter 에서 등록한 HttpMessageConverter
+     * binding 못할경우 발생 주로 @RequestBody, @RequestPart 어노테이션에서 발생
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<BaseResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
@@ -39,7 +39,8 @@ public class GlobalExceptionHandler {
      * 지원하지 않은 HTTP method 호출 할 경우 발생
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<BaseResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    protected ResponseEntity<BaseResponse> handleHttpRequestMethodNotSupportedException(
+            HttpRequestMethodNotSupportedException e) {
         log.error("NOT SUPPORTED HTTP METHOD CALLED", e);
         final BaseResponse response = BaseResponse.errorOf(ApplicationErrorCode.METHOD_NOT_ALLOWED);
         return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
@@ -58,6 +59,16 @@ public class GlobalExceptionHandler {
         } else {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    /**
+     * DB Exception
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected ResponseEntity<BaseResponse> handleDataViolationException(final DataIntegrityViolationException e) {
+        log.error("Data Violation Exception", e);
+        final BaseResponse response = new BaseResponse(false, e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

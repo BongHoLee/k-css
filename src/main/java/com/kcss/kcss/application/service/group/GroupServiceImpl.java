@@ -31,6 +31,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public void remove(Long id) {
+        repository.removeFor(id);
+    }
+
+    @Override
     public List<Group> findAllRegistered() {
         List<Group> groupList = repository.findAll();
         if (groupList.isEmpty()) {

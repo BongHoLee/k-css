@@ -38,11 +38,11 @@ class PaymentRepositoryImplTest {
     @Test
     @DisplayName("Payment 영속화 테스트")
     void Payment_save_테스트() {
-        Account account = Account.builder().id(1L).age(Age.of(30L)).residence(Residence.BUSAN).build();
+        Account account = Account.builder().id(10000L).age(Age.of(30L)).residence(Residence.BUSAN).build();
         Account savedAccount = accountRepository.save(account);
 
         Payment payment = Payment.builder()
-                .id(1L)
+                .id(10000L)
                 .account(savedAccount)
                 .amount(Amount.of(30.0))
                 .itemCategory(ItemCategory.BOOK)

@@ -82,9 +82,11 @@ public class PaymentEntity {
                 .id(id)
                 .account(accountEntity.convert())
                 .amount(Amount.of(amount))
-                .methodType(MethodType.kor(methodType))
+                .methodType(MethodType.of(methodType))
                 .itemCategory(ItemCategory.of(itemCategory))
                 .region(Region.of(region))
                 .build();
     }
+
+
 }

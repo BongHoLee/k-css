@@ -89,11 +89,25 @@ public class AccountEntity {
                         .id(paymentEntity.getId())
                         .account(Account.builder().id(id).build())
                         .itemCategory(ItemCategory.of(paymentEntity.getItemCategory()))
-                        .methodType(MethodType.kor(paymentEntity.getMethodType()))
+                        .methodType(MethodType.of(paymentEntity.getMethodType()))
                         .amount(Amount.of(paymentEntity.getAmount()))
                         .region(Region.of(paymentEntity.getRegion()))
                         .build()
                 ).collect(toList()))
                 .build();
     }
+
+//    @Transient
+//    private boolean isNew = true;
+//
+//    @Override
+//    public boolean isNew() {
+//        return isNew;
+//    }
+//
+//    @PrePersist
+//    @PostLoad
+//    private void markNotNew() {
+//        isNew = false;
+//    }
 }

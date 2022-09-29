@@ -64,7 +64,7 @@ public class PaymentDTO {
                     .id(paymentId)
                     .account(Account.builder().id(accountId).build())
                     .amount(Amount.of(amount))
-                    .methodType(MethodType.kor(methodType))
+                    .methodType(MethodType.of(methodType))
                     .itemCategory(ItemCategory.of(itemCategory))
                     .region(Region.of(region))
                     .build();

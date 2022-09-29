@@ -1,4 +1,4 @@
-###
+### POST 계정 등록1
 POST http://localhost:8080/account
 Content-Type: application/json
 
@@ -8,7 +8,7 @@ Content-Type: application/json
   "residence": "부산"
 }
 
-###
+### POST 계정 등록2
 POST http://localhost:8080/account
 Content-Type: application/json
 
@@ -18,7 +18,7 @@ Content-Type: application/json
   "residence": "서울"
 }
 
-###
+### POST 계정 등록3
 POST http://localhost:8080/account
 Content-Type: application/json
 
@@ -28,6 +28,6 @@ Content-Type: application/json
   "residence": "전남"
 }
 
-### GET registerRequest with a header
+### GET 계정 조회
 GET http://localhost:8080/account?id=2
 Accept: application/json

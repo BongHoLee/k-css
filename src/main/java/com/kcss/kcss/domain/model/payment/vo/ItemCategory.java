@@ -24,7 +24,7 @@ public enum ItemCategory {
 
     public static ItemCategory of(String categoryName) {
         return Arrays.stream(ItemCategory.values())
-                .filter(itemCategory -> itemCategory.categoryName().equals(categoryName))
+                .filter(itemCategory -> itemCategory.categoryName().equals(categoryName) || itemCategory.name().equals(categoryName))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException("not support category : " + categoryName, DomainErrorCode.NOT_SUPPORT_CATEGORY));
     }

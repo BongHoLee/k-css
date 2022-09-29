@@ -35,12 +35,12 @@ class PaymentServiceImplTest {
     @DisplayName("결제 정상 처리 테스트")
     void 결제_발행_정상_처리_테스트() {
         Payment payment = Payment.builder()
-                .id(1L)
+                .id(10000L)
                 .amount(Amount.of(30000.0))
                 .itemCategory(ItemCategory.BEAUTY)
                 .methodType(MethodType.CARD)
                 .region(Region.BUSAN)
-                .account(Account.builder().id(1L).build())
+                .account(Account.builder().id(10L).build())
                 .build();
 
         assertDoesNotThrow(() -> paymentService.pay(payment));
