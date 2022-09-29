@@ -9,14 +9,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.kcss.kcss.application.dto.AccountDTO.Request;
-import com.kcss.kcss.application.dto.AccountDTO.Response;
+import com.kcss.kcss.application.dto.AccountDTO.RegisterRequest;
+import com.kcss.kcss.application.dto.AccountDTO.Info;
 import com.kcss.kcss.application.dto.BaseResponse;
 import com.kcss.kcss.application.error.ApplicationErrorCode;
 import com.kcss.kcss.domain.model.account.Account;
 import com.kcss.kcss.domain.model.account.vo.Age;
 import com.kcss.kcss.domain.model.account.vo.Residence;
 import com.kcss.kcss.domain.service.account.AccountService;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,7 @@ class AccountControllerTest {
         given(accountService.register(any()))
                 .willReturn(Account.builder().id(1L).residence(Residence.BUSAN).age(Age.of(30L)).build());
 
-        Request q = Request.builder().age(30L).residence("부산").build();
+        RegisterRequest q = RegisterRequest.builder().id(1L).age(30L).residence("부산").build();
         String requestContents = objectMapper.writeValueAsString(q);
         String responseContents = objectMapper.writeValueAsString(BaseResponse.success());
         mockMvc.perform(post("/account")
@@ -79,7 +80,7 @@ class AccountControllerTest {
         given(accountService.findAccountOf(any()))
                 .willReturn(Account.builder().id(1L).residence(Residence.BUSAN).age(Age.of(30L)).build());
 
-        Response q = Response.builder().id(1L).age(30L).residence("부산").build();
+        Info q = Info.builder().id(1L).age(30L).residence("부산").payments(new ArrayList<>()).build();
         String response = objectMapper.writeValueAsString(q);
         mockMvc.perform(get("/account")
                         .param("id", "1")
@@ -105,7 +106,7 @@ class AccountControllerTest {
     @DisplayName("계정 생성 정보  누락 시 Valid 검증 테스트")
     void Account_생성_정보_누락시_검증() throws Exception {
 
-        Request q = Request.builder().age(30L).build();
+        RegisterRequest q = RegisterRequest.builder().id(1L).age(30L).build();
         String requestContents = objectMapper.writeValueAsString(q);
         String responseContents = objectMapper.writeValueAsString(BaseResponse.errorOf(ApplicationErrorCode.INVALID_INPUT_VALUE));
         mockMvc.perform(post("/account")

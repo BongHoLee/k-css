@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.payment.vo;
 
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import java.util.Arrays;
 
 public enum ItemCategory {
@@ -24,6 +26,6 @@ public enum ItemCategory {
         return Arrays.stream(ItemCategory.values())
                 .filter(itemCategory -> itemCategory.categoryName().equals(categoryName))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new BusinessException("not support category : " + categoryName, DomainErrorCode.NOT_SUPPORT_CATEGORY));
     }
 }

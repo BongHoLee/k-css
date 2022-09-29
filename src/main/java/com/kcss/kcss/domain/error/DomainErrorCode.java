@@ -16,7 +16,10 @@ public enum DomainErrorCode implements ErrorCode {
 
     // Payment domain model
     NOT_STABLE_PAYMENT(3001, "P001", " payment should be stable"),
-    NOT_VALID_AMOUNT(3002, "P002", " not valid amount")
+    NOT_VALID_AMOUNT(3002, "P002", " not valid amount"),
+    NOT_SUPPORT_REGION(3003, "P003", " not support region"),
+    NOT_SUPPORT_METHOD_TYPE(3004, "P004", " not support method type"),
+    NOT_SUPPORT_CATEGORY(3005, "P005", " not support category"),
     ;
     private final String code;
     private final String message;

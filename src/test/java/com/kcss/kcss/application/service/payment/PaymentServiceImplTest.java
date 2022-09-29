@@ -35,7 +35,7 @@ class PaymentServiceImplTest {
     @DisplayName("결제 정상 처리 테스트")
     void 결제_발행_정상_처리_테스트() {
         Payment payment = Payment.builder()
-                .id(1000L)
+                .id(1L)
                 .amount(Amount.of(30000.0))
                 .itemCategory(ItemCategory.BEAUTY)
                 .methodType(MethodType.CARD)

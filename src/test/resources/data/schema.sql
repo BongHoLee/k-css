@@ -1,6 +1,6 @@
 create table if not exists account
 (
-    account_id bigint auto_increment primary key,
+    account_id bigint  primary key,
     age        int          not null,
     residence  varchar(255) null
     );
@@ -16,7 +16,7 @@ create table if not exists payment
     );
 create table if not exists pgroup
 (
-    group_id    bigint auto_increment primary key,
+    group_id    bigint  primary key,
     conditions  json         not null,
     information varchar(255) null
     );

@@ -30,7 +30,7 @@ class AccountServiceImplTest {
     @Test
     @DisplayName("계정 정상 저장 테스트")
     void 계정_저장_정상_처리_테스트() {
-        Account account = Account.builder().age(Age.of(30L)).residence(Residence.BUSAN).build();
+        Account account = Account.builder().id(1L).age(Age.of(30L)).residence(Residence.BUSAN).build();
         assertDoesNotThrow(() -> accountService.register(account));
     }
 

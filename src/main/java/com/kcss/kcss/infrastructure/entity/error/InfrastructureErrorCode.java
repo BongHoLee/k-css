@@ -6,7 +6,7 @@ import com.kcss.kcss.global.error.ErrorCode;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum InfrastructureErrorCode implements ErrorCode{
 
-    NOT_VALID_ID(5001, "I001", " payment id cannot be null"),
+    NOT_VALID_ID(5001, "I001", " id cannot be null"),
     ;
 
     private final String code;

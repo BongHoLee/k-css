@@ -30,6 +30,7 @@ class AccountRepositoryImplTest {
     @DisplayName("Account 영속화 테스트")
     void Account_save__테스트() {
         Account account = Account.builder()
+                .id(1L)
                 .age(Age.of(39L))
                 .residence(Residence.DAEJEON)
                 .build();

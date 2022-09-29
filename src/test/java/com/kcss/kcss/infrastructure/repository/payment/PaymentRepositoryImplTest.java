@@ -11,12 +11,8 @@ import com.kcss.kcss.domain.model.payment.vo.Amount;
 import com.kcss.kcss.domain.model.payment.vo.ItemCategory;
 import com.kcss.kcss.domain.model.payment.vo.MethodType;
 import com.kcss.kcss.domain.model.payment.vo.Region;
-import com.kcss.kcss.infrastructure.entity.account.AccountEntity;
 import com.kcss.kcss.infrastructure.repository.account.AccountRepositoryImpl;
 import java.util.Optional;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +38,11 @@ class PaymentRepositoryImplTest {
     @Test
     @DisplayName("Payment 영속화 테스트")
     void Payment_save_테스트() {
-        Account account = Account.builder().age(Age.of(30L)).residence(Residence.BUSAN).build();
+        Account account = Account.builder().id(1L).age(Age.of(30L)).residence(Residence.BUSAN).build();
         Account savedAccount = accountRepository.save(account);
 
         Payment payment = Payment.builder()
-                .id(1000L)
+                .id(1L)
                 .account(savedAccount)
                 .amount(Amount.of(30.0))
                 .itemCategory(ItemCategory.BOOK)

@@ -1,9 +1,10 @@
 package com.kcss.kcss.application.controller;
 
+
 import com.kcss.kcss.application.dto.AccountDTO;
-import com.kcss.kcss.application.dto.AccountDTO.Info;
 import com.kcss.kcss.application.dto.BaseResponse;
-import com.kcss.kcss.domain.service.account.AccountService;
+import com.kcss.kcss.application.dto.PaymentDTO;
+import com.kcss.kcss.domain.service.payment.PaymentService;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -15,23 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/account")
-public class AccountController {
-    private final AccountService accountService;
+@RequestMapping("/payment")
+public class PaymentController {
+    private final PaymentService paymentService;
 
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService;
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
 
     @GetMapping
-    public Info findAccount(@RequestParam @NotNull @NotEmpty Long id) {
-        return Info.of(accountService.findAccountOf(id));
+    public PaymentDTO.Info findPayment(@RequestParam @NotNull @NotEmpty Long id) {
+        return PaymentDTO.Info.of(paymentService.paymentOf(id));
 
     }
 
     @PostMapping
-    public BaseResponse registerAccount(@RequestBody @Valid AccountDTO.RegisterRequest registerRequest) {
-        accountService.register(registerRequest.convert());
+    public BaseResponse pay(@RequestBody @Valid PaymentDTO.PayRequest request) {
+        paymentService.pay(request.convert());
         return BaseResponse.success();
     }
 }

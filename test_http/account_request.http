@@ -1,0 +1,33 @@
+###
+POST http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "id": 1,
+  "age": 20,
+  "residence": "부산"
+}
+
+###
+POST http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "id": 2,
+  "age": 30,
+  "residence": "서울"
+}
+
+###
+POST http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "id": 3,
+  "age": 11,
+  "residence": "전남"
+}
+
+### GET registerRequest with a header
+GET http://localhost:8080/account?id=2
+Accept: application/json

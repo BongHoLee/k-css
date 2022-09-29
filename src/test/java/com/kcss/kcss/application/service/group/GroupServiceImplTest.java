@@ -37,6 +37,7 @@ class GroupServiceImplTest {
         ));
         String description = "송금 결제";
         Group group = Group.builder()
+                .id(1L)
                 .description(description)
                 .conditions(conditions)
                 .build();
@@ -56,6 +57,7 @@ class GroupServiceImplTest {
         ));
         String description = "거주지역 외 송금 결제";
         Group group = Group.builder()
+                .id(1L)
                 .description(description)
                 .conditions(conditions)
                 .build();
@@ -72,12 +74,14 @@ class GroupServiceImplTest {
     void 모든_그룹_조회_테스트() {
 
         Group group1 = Group.builder()
+                .id(1L)
                 .description("송금 결제")
                 .conditions( new ArrayList<>(Arrays.asList(
                         new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금"))
                 ))).build();
 
         Group group2 = Group.builder()
+                .id(2L)
                 .description("거주지역 외 송금 결제")
                 .conditions(new ArrayList<>(Arrays.asList(
                         new Condition(Key.METHOD_TYPE, Operator.EQUALS, new Value("송금")),

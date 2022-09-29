@@ -11,8 +11,6 @@ import com.kcss.kcss.infrastructure.entity.error.InfrastructureErrorCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -84,7 +82,7 @@ public class PaymentEntity {
                 .id(id)
                 .account(accountEntity.convert())
                 .amount(Amount.of(amount))
-                .methodType(MethodType.of(methodType))
+                .methodType(MethodType.kor(methodType))
                 .itemCategory(ItemCategory.of(itemCategory))
                 .region(Region.of(region))
                 .build();

@@ -1,6 +1,8 @@
 package com.kcss.kcss.domain.model.payment.vo;
 
 
+import com.kcss.kcss.domain.error.DomainErrorCode;
+import com.kcss.kcss.global.error.BusinessException;
 import java.util.Arrays;
 
 public enum Region {
@@ -25,6 +27,6 @@ public enum Region {
         return Arrays.stream(Region.values())
                 .filter(region -> region.regionName().equals(regionName))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new BusinessException("not support region : " + regionName, DomainErrorCode.NOT_SUPPORT_REGION));
     }
 }

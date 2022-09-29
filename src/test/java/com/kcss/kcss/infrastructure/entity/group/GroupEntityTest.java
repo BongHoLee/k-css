@@ -68,6 +68,7 @@ class GroupEntityTest {
         ));
         String description = "SEND payment";
         GroupEntity group = GroupEntity.builder()
+                .id(1L)
                 .description(description)
                 .conditions(qslConditions)
                 .build();
@@ -87,6 +88,7 @@ class GroupEntityTest {
         ));
         String description = "SEND and not region payment";
         GroupEntity group = GroupEntity.builder()
+                .id(1L)
                 .description(description)
                 .conditions(qslConditions)
                 .build();
