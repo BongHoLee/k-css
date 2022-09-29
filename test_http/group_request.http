@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "groupId": 1,
-  "description": "카드 결제",
+  "description": "카드 결제 그룹",
   "condition": [
     {
       "key": "methodType",
@@ -58,7 +58,7 @@ Content-Type: application/json
 }
 
 ### GET 특정 그룹 조회
-GET http://localhost:8080/group?id=3
+GET http://localhost:8080/group?id=1
 Accept: application/json
 
 ### GET 모든 그룹 조회

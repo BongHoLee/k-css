@@ -77,7 +77,7 @@ public class GroupRepositoryImpl implements GroupRepository {
                 .count(statisticsDO.getCount())
                 .totalAmount(statisticsDO.getTotalAmount())
                 .avgAmount(statisticsDO.getAvgAmount())
-                .maxAmount(statisticsDO.getAvgAmount())
+                .maxAmount(statisticsDO.getMaxAmount())
                 .minAmount(statisticsDO.getMinAmount())
                 .build();
     }
