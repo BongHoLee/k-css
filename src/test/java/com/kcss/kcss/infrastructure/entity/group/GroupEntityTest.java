@@ -76,7 +76,7 @@ class GroupEntityTest {
         BooleanExpression[] expressions = group.expressionForCondition();
 
         assertThat(expressions).hasSize(1);
-        assertThat(expressions[0].toString()).hasToString("paymentEntity.methodType = SEND");
+        assertThat(expressions[0].toString()).hasToString("paymentEntity.methodType = 송금");
     }
 
     @Test
@@ -96,7 +96,7 @@ class GroupEntityTest {
         BooleanExpression[] expressions = group.expressionForCondition();
 
         assertThat(expressions).hasSize(2);
-        assertThat(expressions[0].toString()).hasToString("paymentEntity.methodType = SEND");
+        assertThat(expressions[0].toString()).hasToString("paymentEntity.methodType = 송금");
         assertThat(expressions[1].toString()).hasToString("accountEntity.residence != paymentEntity.region");
     }
 }
