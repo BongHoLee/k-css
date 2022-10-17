@@ -45,6 +45,8 @@ public class AccountEntity {
     @Column
     private Long age;
 
+    // N+1 문제 발생. 해결 방법에 대해 생각해봐야함
+    // 왜 구현 당시 해결하지 않았는지에 대해서는... 어떻게 해야 잘 대답할 수 있을까?
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "accountEntity", cascade = CascadeType.REMOVE)
     private List<PaymentEntity> paymentEntities;
 
@@ -96,18 +98,4 @@ public class AccountEntity {
                 ).collect(toList()))
                 .build();
     }
-
-//    @Transient
-//    private boolean isNew = true;
-//
-//    @Override
-//    public boolean isNew() {
-//        return isNew;
-//    }
-//
-//    @PrePersist
-//    @PostLoad
-//    private void markNotNew() {
-//        isNew = false;
-//    }
 }

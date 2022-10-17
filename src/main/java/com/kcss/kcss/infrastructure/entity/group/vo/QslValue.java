@@ -29,6 +29,7 @@ public class QslValue {
                 .collect(toList());
     }
 
+    // Primitive에 대한 일반 타입, QslKey에 대한 일반 타입 반환
     private Object plainType(String value, QslKey key) {
         if (value.contains("$")) {
             return QslKey.of(value.replace("$", ""));
@@ -43,6 +44,7 @@ public class QslValue {
                 .collect(toList());
     }
 
+    // Primitive에 대한 Expression 타입, QslKey에 대한 Expression 타입 반환
     private Expression<?> expressionType(String value, QslKey key) {
         if (value.contains("$")) {
             return QslKey.of(value.replace("$", "")).expression();
